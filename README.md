@@ -1,38 +1,43 @@
-# React Tutorial
+### What is ReactJS?
 
-This is the React comment box example from [the React tutorial](http://facebook.github.io/react/docs/tutorial.html).
+React is a UI library developed at Facebook to facilitate the creation of interactive, stateful & reusable UI components. 
+It is used at Facebook in production, and Instagram.com is written entirely in React.
 
-## To use
+### Three major features
 
-There are several simple server implementations included. They all serve static files from `public/` and handle requests to `comments.json` to fetch or add data. Start a server with one of the following:
+1. **JUST THE UI**
 
-### Node
+Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, 
+it's easy to try it out on a small feature in an existing project.
 
-```sh
-npm install
-node server.js
-```
+2. **VIRTUAL DOM**
 
-### Python
+React abstracts away the DOM from you, giving a simpler programming model and **better performance**.
 
-```sh
-pip install -r requirements.txt
-python server.py
-```
+3. **DATA FLOW**
 
-### Ruby
-```sh
-ruby server.rb
-```
+React implements **one-way** reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.
 
-### PHP
-```sh
-php server.php
-```
 
-### Go
-```sh
-go run server.go
-```
+### Why use ReactJS?
 
-And visit <http://localhost:3000/>. Try opening multiple tabs!
+React is built to solve one problem: **building large applications with data that changes over time.** To do this, React uses two main ideas. 
+
+#### Simple and Declarative
+
+Simply express how your app should look at any given point in time, and React will automatically manage all UI updates 
+when your underlying data changes. When the data changes, React conceptually hits the "refresh" button, and knows to **only 
+update the changed parts**.
+
+#### Build Composable Components
+
+React is all about building reusable components. In fact, with React the only thing you do is build components. 
+Since they're so encapsulated, components make code reuse, testing, and separation of concerns easy.
+
+React **challenges** a lot of conventional wisdom, and at first glance some of the ideas may seem crazy. 
+
+We will get to these "crazy" ideas, to see how react different from AngularJS and why react is drawing so much attraction.
+
+
+
+
