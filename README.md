@@ -1,5 +1,3 @@
-### Hello World
-
 Let's look at the sample _hello world_ app in React.
 
  `<script type="text/jsx">`
