@@ -1,5 +1,3 @@
-### What is ReactJS?
-
 React is a UI library developed at Facebook to facilitate the creation of interactive, stateful & reusable UI components. 
 It is used at Facebook in production, and Instagram.com is written entirely in React.
 
@@ -34,9 +32,12 @@ update the changed parts**.
 React is all about building reusable components. In fact, with React the only thing you do is build components. 
 Since they're so encapsulated, components make code reuse, testing, and separation of concerns easy.
 
+
+### Not Conventional 
+
 React **challenges** a lot of conventional wisdom, and at first glance some of the ideas may seem crazy. 
 
-We will get to these "crazy" ideas, to see how react different from AngularJS and why react is drawing so much attraction.
+We will get to these "crazy" ideas, to see how react is different from AngularJS and why react is drawing so much attraction.
 
 
 
