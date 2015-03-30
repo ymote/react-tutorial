@@ -1,43 +1,42 @@
-React is a UI library developed at Facebook to facilitate the creation of interactive, stateful & reusable UI components. 
-It is used at Facebook in production, and Instagram.com is written entirely in React.
+### Hello World
 
-### Three major features
+Let's look at the sample _hello world_ app in React.
 
-1 JUST THE UI
+ `<script type="text/jsx">`
 
-Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, 
-it's easy to try it out on a small feature in an existing project.
+If you go through our Angular courses, you know it is some sort of template language embeded in `<script>` tag, like `ng-template`. 
+Here the language is **JSX**.
 
-2 VIRTUAL DOM
+### JSX
 
-React abstracts away the DOM from you, giving a simpler programming model and **better performance**.
+From react website: 
 
-3 DATA FLOW
+> JSX is a JavaScript syntax extension that looks similar to XML. You can use a simple JSX syntactic transform with React.
 
-React implements **one-way** reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.
+Essentially, we are writing code in a syntax similar to Javascript, and React helps us to transfer it to the JS browser can understand. 
+That's the reason why we include `<script src="lib/JSXTransformer.js"></script>` in header, for the transformation.
 
+To further understand this syntax, you can check out <a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX doc</a>.
 
-### Why use ReactJS?
+### React.render
 
-React is built to solve one problem: **building large applications with data that changes over time.** To do this, React uses two main ideas. 
+> Render a ReactElement into the DOM in the supplied container and return a reference to the component.
 
-### 1. Simple and Declarative
+On line 12, we create a DOM element `<h1>` containing "Hello, world!", and render it to a `<div>` with id `example`.
 
-Simply express how your app should look at any given point in time, and React will automatically manage all UI updates 
-when your underlying data changes. When the data changes, React conceptually hits the "refresh" button, and knows to **only 
-update the changed parts**.
-
-### 2. Build Composable Components
-
-React is all about building reusable components. In fact, with React the only thing you do is build components. 
-Since they're so encapsulated, components make code reuse, testing, and separation of concerns easy.
+The `<div>` is declared on line 8, out of the `<script>` tag.
 
 
-### Not Conventional 
+### What we know
 
-React **challenges** a lot of conventional wisdom, and at first glance some of the ideas may seem crazy. 
+We learn several things from this simple example. 
 
-We will get to these "crazy" ideas, to see how react is different from AngularJS and why react is drawing so much attraction.
+1. React impose us on a new syntax -- JSX. It is quite similar to JS and should be easier to use. We will see to it in this course.
+2. Essentially we are creating a component, although quite simple. The component is self-contained and rendered to DOM. 
+
+The way we have to write the HTML view (`<h1>`) in script is unconventional. It breaks the estabilished 
+<a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC pattern</a>. React comes with several 
+ground breaking ideas which likely to influence **all other** javascript frameworks.
 
 
 
