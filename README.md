@@ -41,7 +41,7 @@ React.render(
 
 Its use is optional but we've found JSX syntax easier to use than plain JavaScript. Read more on <a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX Syntax article</a>.
 
-#### What's going on
+### What's going on
 
 We pass some methods in a JavaScript object to `React.createClass()` to create a new React component. The most important of these methods is called `render` 
 which returns a tree of React components that will eventually render to HTML.
