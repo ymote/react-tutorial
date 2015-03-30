@@ -2,15 +2,30 @@
 <html>
   <head>
     <title>Hello React</title>
-    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/base.css" />
     <script src="lib/react.js"></script>
     <script src="lib/JSXTransformer.js"></script>
     <script src="lib/jquery.min.js"></script>
-    <script src="lib/showdown.min.js"></script>
   </head>
   <body>
     <div id="content"></div>
-    <script type="text/jsx;harmony=true" src="app/app.js"></script>
+    <script type="text/jsx">
+
+      var CommentBox = React.createClass({
+        render: function() {
+          return (
+            <div className="commentBox">
+              Hello, world! I am a CommentBox.
+            </div>
+          );
+        }
+      });
+      React.render(
+        <CommentBox />,
+        document.getElementById('content')
+      );
+
+    </script>
   </body>
 </html>
