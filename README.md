@@ -5,16 +5,16 @@ It is used at Facebook in production, and Instagram.com is written entirely in R
 
 ### Three major features
 
-1. **JUST THE UI**
+1 JUST THE UI
 
 Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, 
 it's easy to try it out on a small feature in an existing project.
 
-2. **VIRTUAL DOM**
+2 VIRTUAL DOM
 
 React abstracts away the DOM from you, giving a simpler programming model and **better performance**.
 
-3. **DATA FLOW**
+3 DATA FLOW
 
 React implements **one-way** reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.
 
