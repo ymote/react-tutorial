@@ -16,6 +16,7 @@ var CommentList = React.createClass({
     return (
       <div className="commentList">
         //add Comment Component Here
+        //add Comment Component Here
       </div>
     );
   }
