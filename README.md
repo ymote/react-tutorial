@@ -1,14 +1,4 @@
-We'll be building a simple but realistic comments box that you can drop into a blog, a basic version of the realtime comments offered by Disqus, LiveFyre or Facebook comments.
-
-We'll provide:
-
-1. A view of all of the comments
-2. A form to submit a comment
-3. Hooks for you to provide a custom backend
-
-### Your first component
-
-React is all about modular, composable components. For our comment box example, we'll have the following component structure:
+Let's build skeletons for CommentList and CommentForm in this exercise. Remember our comment box structure:
 
 ```
 - CommentBox
@@ -17,39 +7,29 @@ React is all about modular, composable components. For our comment box example, 
   - CommentForm
 ```
 
-Let's build the `CommentBox` component, which is just a simple `<div>`.
+### Refactor
 
-#### JSX Syntax
+Let's put our javascript code into a seperate file ***app.js*** and clean up ***index.html***. Now in ***index.html***,
+we use the `<script>` tag to reference ***app.js***, we still need to declare the type of script as `jsx`.
 
-The first thing you'll notice is the XML-ish syntax in your JavaScript. We have a simple precompiler that translates the syntactic sugar to this plain JavaScript:
+### Composing components
 
-```javascript
-var CommentBox = React.createClass({displayName: 'CommentBox',
-  render: function() {
-    return (
-      React.createElement('div', {className: "commentBox"},
-        "Hello, world! I am a CommentBox."
-      )
-    );
-  }
-});
-React.render(
-  React.createElement(CommentBox, null),
-  document.getElementById('content')
-);
-```
+This is the place we begin to understand React is all about building components.
 
-Its use is optional but we've found JSX syntax easier to use than plain JavaScript. Read more on <a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX Syntax article</a>.
+The `CommentBox` is the main component and it is made of two other component -- `CommentList` and `CommentForm`. 
 
-### What's going on
+Each component is created by `React.createClass`. The `render` method in each component render itself to HTML. 
 
-We pass some methods in a JavaScript object to `React.createClass()` to create a new React component. The most important of these methods is called `render` 
-which returns a tree of React components that will eventually render to HTML.
+`CommentBox` is the mixing of HTML tags and the two components defined earlier.  
 
-The `<div>` tags are not actual DOM nodes; they are instantiations of React `div` components. You can think of these as markers or pieces of data that React knows how to handle. 
-React is **safe**. We are not generating HTML strings so XSS protection is the default.
+### Separation of Concerns
 
-You do not have to return basic HTML. You can return a tree of components that you (or someone else) built. This is what makes React **composable**: 
-a key tenet of maintainable frontends.
+We expect `CommentList` is to show all the comments and `CommentForm` is where we add new comment. By seperating them, each compoent 
+just need to focus on its own functionality. 
 
-`React.render()` instantiates the root component, starts the framework, and injects the markup into a raw DOM element, provided as the second argument.
+
+> By building modular components that reuse other components with well-defined interfaces, (`CommentBox` resue `CommentList` and `CommentForm`)
+you get much of the same benefits that you get by using functions or classes. Specifically you can separate the different 
+concerns of your app simply by building new components. 
+
+
