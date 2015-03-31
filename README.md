@@ -1,50 +1,25 @@
-Now we have basic structure of our comment box ready. We focus on how to render a single commment.
+Markdown is a simple way to format your text inline. For example, surrounding text with asterisks will make it emphasized.
 
-### Using props
+First, we add the third-party Showdown library to the `<head>` in ***index.html***. This is a JavaScript library which takes Markdown text and converts it to raw HTML. 
 
-The look of a comment is not terribly exciting. More importantly, the Comment component, which will depend on data passed in from it's parent (`CommentList`). 
-Data passed in from a parent component is available as a 'property' on the child component. These 'properties' are accessed through **this.props**. 
+Next, let's convert the comment text to Markdown and output it.
 
+All we need to do is to convert `this.props.children` from React's wrapped text to a raw string that Showdown will understand so we explicitly call toString().
 
-Assume we have a comment component as follows,
+We instantiate converter with `new Showdown.converter()`, and use the `makeHtml` method to convert the Markdown text to html.
 
-```js
-  <div className="commentText">
-    <p>{this.props.children}</p> 
-    <span className="date sub-text">by {this.props.author}</span>
-  </div> 
-```
+### Escape and XSS
 
-It expects `this.props.author` and `this.props.chidren` passed in from parent. `{ }` is used to render these expression to HTML.
+But there's a problem! Our rendered comments look like this in the browser: "<p>This is <em>another</em> comment</p>"(React treats everything as string, so it does not recognize HTML tags). 
+We want those tags to actually render as HTML.
 
-> We access named attributes passed to the component as keys on this.props and any nested elements as this.props.children.
+That's React protecting you from an <a href="http://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">XSS</a> attack 
+(So user can not inject malicious `<script>` tag into comment). There's a way to get around it but the framework warns you not to use it.
 
-To use Comment in CommentList component:
+This is a special API -- `dangerouslySetInnerHTML`, that intentionally makes it difficult to insert raw HTML, but for Showdown we'll take advantage of this backdoor.
 
-```js
-  <Comment author="Pete Hunt">This is one comment</Comment>
-```
+**Remember:** by using this feature you're relying on Showdown to be secure.
 
-The `author` is an attribute passed in, in this case -- Peter Hunt. `children` is used to access the content in the element. 
-It is `This is one comment`.
-
-### Children
-
-You can include additional React components or JavaScript expressions between the opening and closing tags like this:
-
-```js
-<Parent><Child /></Parent>
-```
-
-Parent can read its children by accessing the special **this.props.children** prop.
-
-
-### Ownership
-
-In React, an owner is the component that sets the props of other components. In our case, `Comment` is owned by `CommentList`.
-
-A component **cannot mutate its props** — they are always consistent with what its owner sets them to. This key property leads to UIs that are guaranteed to be consistent.
-
-The `Comment` component can not change its author and text. It only renders a comment to HTML.
-
+> React's design philosophy is that it should be “easy” to make things safe, and developers should explicitly state their intent when performing “unsafe” operations. 
+The prop name dangerouslySetInnerHTML is intentionally chosen to be frightening, and the prop value (an object instead of a string) can be used to indicate sanitized data.
 
