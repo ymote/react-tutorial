@@ -1,8 +1,21 @@
+var Comment = React.createClass({
+  render: function() {
+    return (
+      <li>
+        <div className="commentText">
+          <p>{this.props.children}</p> 
+          <span className="date sub-text">by {this.props.author}</span>
+        </div>      
+      </li>      
+    );
+  }
+});
+
 var CommentList = React.createClass({
   render: function() {
     return (
       <div className="commentList">
-        Hello, world! I am a CommentList.
+        //add Comment Component Here
       </div>
     );
   }
