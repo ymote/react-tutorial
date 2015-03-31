@@ -10,8 +10,13 @@ We instantiate converter with `new Showdown.converter()`, and use the `makeHtml`
 
 ### Escape and XSS
 
-But there's a problem! Our rendered comments look like this in the browser: "<p>This is <em>another</em> comment</p>"(React treats everything as string, so it does not recognize HTML tags). 
-We want those tags to actually render as HTML.
+But there's a problem! Our previous rendered comments look like this in the browser: 
+
+```
+<p>This is <em>another</em> comment</p>
+```
+
+React treats everything as string, so it does not recognize HTML tags. We want those tags to actually render as HTML.
 
 That's React protecting you from an <a href="http://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">XSS</a> attack 
 (So user can not inject malicious `<script>` tag into comment). There's a way to get around it but the framework warns you not to use it.
