@@ -28,9 +28,7 @@ are only simple `<div>s`.
 We expect `CommentList` to show all the comments, and `CommentForm` is where we add new comment. Each compoent 
 only need to focus on its own functionality. 
 
-To this end, `CommentBox` can reuse these two components to provide comments.
-
-> By building modular components that reuse other components with well-defined interfaces, (`CommentBox` resue `CommentList` and `CommentForm`)
+> By building modular components that reuse other components with well-defined interfaces,
 you get much of the same benefits that you get by using functions or classes. Specifically you can separate the different 
 concerns of your app simply by building new components. 
 
