@@ -1,3 +1,8 @@
+var data = [
+  {author: "Pete Hunt", text: "This is one comment"},
+  {author: "Jordan Walke", text: "This is *another* comment"}
+];
+
 var converter = new Showdown.converter();
 
 var Comment = React.createClass({
@@ -14,12 +19,19 @@ var Comment = React.createClass({
   }
 });
 
+//Dynamically build comment nodes, which is an array of comment components
 var CommentList = React.createClass({
   render: function() {
+    var commentNodes = this.props.data.map(function (comment) {
+      return (
+        <Comment author={comment.author}>
+          {comment.text}
+        </Comment>
+      );
+    });    
     return (
       <div className="commentList">
-        //add Comment Component Here
-        //add Comment Component Here
+        //render the commentNodes with { } expression
       </div>
     );
   }
@@ -35,6 +47,7 @@ var CommentForm = React.createClass({
   }
 });
 
+//inside the CommentBox, we can use this.props.data to access the attribute
 var CommentBox = React.createClass({
   render: function() {
     return (
@@ -47,7 +60,7 @@ var CommentBox = React.createClass({
           <p className="taskDescription">Hello, world! I am a post.</p>
         </div>
         <div className="actionBox">
-          <CommentList />
+          <CommentList data={this.props.data}/>
           <CommentForm />
         </div>
       </div>
@@ -55,7 +68,8 @@ var CommentBox = React.createClass({
   }
 });
 
+//the data is injected to root CommentBox component as an attribute
 React.render(
-  <CommentBox />,
+  <CommentBox data={data}/>,
   document.getElementById('content')
 );

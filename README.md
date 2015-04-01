@@ -1,30 +1,37 @@
-Markdown is a simple way to format your text inline. For example, surrounding text with asterisks will make it emphasized.
+So far we've been inserting the comments directly in the source code. Instead, let's render a blob of JSON data into the comment list. 
+In the next exercise, this will come from the server, but for now, we will write it at the top of ***app.js***.
 
-First, we add the third-party Showdown library to the `<head>` in ***index.html***. This is a JavaScript library which takes Markdown text and converts it to raw HTML. 
-
-Next, let's convert the comment text to Markdown and output it.
-
-All we need to do is to convert `this.props.children` from React's wrapped text to a raw string that Showdown will understand so we explicitly call toString().
-
-We instantiate converter with `new Showdown.converter()`, and use the `makeHtml` method to convert the Markdown text to html.
-
-### Escape and XSS
-
-But there's a problem! Our previous rendered comments look like this in the browser: 
-
-```
-<p>This is <em>another</em> comment</p>
+```js
+var data = [
+  {author: "Pete Hunt", text: "This is one comment"},
+  {author: "Jordan Walke", text: "This is *another* comment"}
+];
 ```
 
-React treats everything as string, so it does not recognize HTML tags. We want those tags to actually render as HTML.
+### Data flow
 
-That's React protecting you from an <a href="http://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">XSS</a> attack 
-(So user can not inject malicious `<script>` tag into comment). There's a way to get around it but the framework warns you not to use it.
+We need to get this data into CommentList in a modular way. The comments data is passed into `CommentBox` as attribute `data`. 
+And in `CommentList`, we can access the data via `this.props.data`.
 
-This is a special API -- `dangerouslySetInnerHTML`, that intentionally makes it difficult to insert raw HTML, but for Showdown we'll take advantage of this backdoor.
+Now that the data is available in the CommentList, let's render the comments dynamically.
 
-**Remember:** by using this feature you're relying on Showdown to be secure.
+```js
+var commentNodes = this.props.data.map(function (comment) {
+  return (
+    <Comment author={comment.author}>
+      {comment.text}
+    </Comment>
+  );
+});
+```
 
-> React's design philosophy is that it should be “easy” to make things safe, and developers should explicitly state their intent when performing “unsafe” operations. 
-The prop name dangerouslySetInnerHTML is intentionally chosen to be frightening, and the prop value (an object instead of a string) can be used to indicate sanitized data.
+The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank">map</a> function 
+creates a new array with the results of calling a provided function on every element in this array. 
+
+For each comment data, we construct a `Comment` component and return it. So the `commentNodes` is an array of `Comment` components. 
+Then we only need to render these components to HTML using `{ }` expression. Notice how we're mixing HTML tags and components we've built.
+
+> The JSX compiler will automatically rewrite HTML tags to React.createElement(tagName) expressions and leave everything else alone.
+
+
 
