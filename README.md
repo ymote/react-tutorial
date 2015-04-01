@@ -1,40 +1,46 @@
-So far we've been inserting the comments directly in the source code. Instead, let's render a blob of JSON data into the comment list. 
-In the next exercise, this will come from the server, but for now, we will write it at the top of ***app.js***.
+In the next two exercises, we will replace the hard-coded data with some dynamic data from the server. 
+We will remove the data prop and replace it with a URL to fetch. 
+
+We put comments in ***_comments.json*** and use ajax to load data from the json file in `CommentBox`.
+
+So the `CommentBox` looks like this now,
 
 ```js
-var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"}
-];
+<CommentBox url="_comments.json" />
 ```
 
-### Data flow
+It is different from the prior components because it will have to re-render itself. The component won't have any data until the request from the server comes back, 
+at which point the component may need to render some new comments.
 
-We need to get this data into `CommentList` in a modular way. The comments data is passed into `CommentBox` as attribute `data`. 
-For `CommentList`, we can access the data via `this.props.data`.
+### Reactive state
 
-Now that the data is available in the CommentList, let's render the comments dynamically.
+So far, each component has rendered itself once based on its props. **props are immutable**: they are passed from the parent and are "owned" by the parent. 
+To implement interactions, we introduce mutable state to the component. `this.state` is private to the component and can be changed by calling this.setState(). 
+**When the state is updated, the component re-renders itself.**
+
+We add `getInitialState` method in `CommentBox`.
 
 ```js
-var commentNodes = this.props.data.map(function (comment) {
-  return (
-    <Comment author={comment.author}>
-      {comment.text}
-    </Comment>
-  );
-});
+getInitialState: function() {
+  return {data: []};
+},
 ```
+> getInitialState() executes exactly once during the lifecycle of the component and sets up the initial state of the component.
 
-The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank">map</a> function 
-creates a new array with the results of calling a provided function on every element in this array. 
+To start with, the data is an empty array, meaning we have not fetched data.
 
-Here in the callback function, for each comment data, we construct a `Comment` component and return it. Different from the static comments, 
-we need to use jsx `{ }` to evaluate comment object and fetch the `author` and `text` attributes.
+### Component lifecycle
 
-So the `commentNodes` is an array of `Comment` components.Then we only need to render these components to HTML using `{ }` expression. 
-Notice how we're mixing HTML tags and components we've built.
+Various methods are executed at specific points in a component's <a href="https://facebook.github.io/react/docs/component-specs.html" target="_blank">lifecycle</a>. 
+In our case, we want the `CommentBox` to fetch comments after it is rendered onto view. So we use the `componentDidMount` method.
 
-> The JSX compiler will automatically rewrite HTML tags to React.createElement(tagName) expressions and leave everything else alone.
+> componentDidMount Invoked once, immediately after the initial rendering occurs. If you want to send AJAX requests, perform those operations in this method.
+
+In this exercise, we will put the hard-coded data in the `componentDidMount` method. In the next one, we will change it to use **AJAX** to fetch data from server.  
+
+
+
+
 
 
 

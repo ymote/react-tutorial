@@ -47,8 +47,16 @@ var CommentForm = React.createClass({
   }
 });
 
-//inside the CommentBox, we can use this.props.data to access the attribute
+//use this.setState to set data to our hard-coded comment data in componentDidMount
 var CommentBox = React.createClass({
+  getInitialState: function() {
+    return {data: []};
+  },
+  
+  componentDidMount: function() {
+
+  },  
+  
   render: function() {
     return (
       <div className="detailBox">
@@ -70,6 +78,6 @@ var CommentBox = React.createClass({
 
 //the data is injected to root CommentBox component as an attribute
 React.render(
-  <CommentBox data={data}/>,
+  <CommentBox url="_comments.json" />,
   document.getElementById('content')
 );
