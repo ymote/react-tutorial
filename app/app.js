@@ -42,7 +42,6 @@ var CommentForm = React.createClass({
   }
 });
 
-
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
