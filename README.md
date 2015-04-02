@@ -1,30 +1,47 @@
-In this exercise, we will use **AJAX** to fetch comments from ***_comments.json***.
+Now it's time to build the form. Our CommentForm component should ask the user for their name and comment text and 
+send a request to the server to save the comment.
 
-### Data Model
+The new `<form>` is inside the `render` methdo of `CommentForm` component.
 
-Take a look at the ***_comments.json*** file. It stores a post and its comments. 
-The post has `content` (string) and `comments` (array). For each comment, there are `author`(string) and `text`(string).
+Let's make the form interactive. When the user submits the form, we should clear it, submit a request to the server, 
+and refresh the list of comments. 
 
-### AJAX
+The `handleSubmit` method listens for the form's submit event and clear it.
 
-We use jQuery's <a href="http://api.jquery.com/jquery.ajax/" target="_blank">$.ajax</a> to make an asynchronous request. 
-The method signature for $.ajax is listed below,
+### Events
 
-```js
-$.ajax({
-  url: /* url to post */,
-  dataType: 'json',
-  success: function(data) {
-    /* the data is the object in _comments.json */
-  }.bind(this),
-  error: function(xhr, status, err) {
-    console.log('Can not fetch _comments.json');
-  }.bind(this)
-});
-```
+React attaches event handlers to components using a camelCase naming convention. We attach an **onSubmit** handler 
+to the form's submit event.
 
-In the ajax `success` callback, we need to use `setState` to update data. And the ajax call should be 
-in `componentDidMount` method. 
+In the `handleSubmit` handler, first use `preventDefault()` on the event to prevent the browser's default action of submitting the form. 
+This is a common case if you are using javascript to handler form submission.
+
+### Refs
+
+We need to grab user input values from the `<input>`s in the `render` method.
+
+> In React, what returned from render() is not actual rendered children instances. It is merely a description of the children instances 
+in your component's sub-hierarchy at a particular moment in time.
+
+Basically it means we can not grab the `<input>` returned from render().
+
+To solve this, React supports a special property -- **this.refs** that we can attach to any component that is output from render(). 
+
+Here we use the ref attribute to assign names to `<input>`s. Then we can use **this.refs** to reference `<input>` components. 
+We can call `React.findDOMNode(component)` on a component to get the native browser DOM element.
+
+We can use the DOM element's value property to get user input.
+
+### Where to use refs
+
+Refs are a great way to send a message to a particular child instance (here `<input>`) in a way that would be inconvenient to do via 
+streaming Reactive props and state. 
+
+They should, however, not be your go-to abstraction for flowing data through your application.
+
+Performing DOM measurements almost always requires reaching out to a "native" component such as `<input />` and accessing 
+its underlying DOM node via `React.findDOMNode(this.refs.myInput)`. Refs are one of the only practical ways of doing this reliably.
+
 
 
 

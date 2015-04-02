@@ -33,33 +33,49 @@ var CommentList = React.createClass({
 });
 
 var CommentForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var author = "me";
+    var text = this.refs.text.getDOMNode().value.trim();
+    if (!text) {
+      return;
+    }
+    //set input DOM element's value property to empty string to clear value
+  },  
   render: function() {
     return (
-      <div className="commentForm">
-        Hello, world! I am a CommentForm.
-      </div>
+      <form className="form-inline" role="form" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <input className="form-control" type="text" placeholder="Your comments" ref="text" />
+        </div>
+        <div className="form-group">
+          <input type="submit" className="btn btn-default" value="Add" />
+        </div>
+      </form> 
     );
   }
 });
 
-//In componentDidMount, use ajax to request data from _comments.json 
-//and set this.state.data in success callback
 var CommentBox = React.createClass({
+  loadCommentsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },  
   getInitialState: function() {
     return {data: {content:"", comments: []}};
   },
-  
   componentDidMount: function() {
-
-
-
-
-
-
-
-
+    this.loadCommentsFromServer();
+    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },  
-  
   render: function() {
     return (
       <div className="detailBox">
@@ -68,9 +84,7 @@ var CommentBox = React.createClass({
           <button type="button" className="close" aria-hidden="true">&times;</button>
         </div>
         <div className="commentBox">
-          <p className="taskDescription">
-            //show the post content here
-          </p>
+          <p className="taskDescription">{this.state.data.content}</p>
         </div>
         <div className="actionBox">
           <CommentList data={this.state.data.comments}/>
@@ -83,6 +97,6 @@ var CommentBox = React.createClass({
 
 //the url to fetch data is injected to root CommentBox component as an attribute
 React.render(
-  <CommentBox url="_comments.json" />,
+  <CommentBox url="_comments.json" pollInterval={60000}/>,
   document.getElementById('content')
 );
