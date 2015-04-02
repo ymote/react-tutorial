@@ -69,7 +69,7 @@ var CommentBox = React.createClass({
         </div>
         <div className="commentBox">
           <p className="taskDescription">
-            <!-- show the post content here -->
+            //show the post content here
           </p>
         </div>
         <div className="actionBox">
