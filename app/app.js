@@ -65,7 +65,9 @@ var CommentBox = React.createClass({
           <button type="button" className="close" aria-hidden="true">&times;</button>
         </div>
         <div className="commentBox">
-          <p className="taskDescription">Hello, world! I am a post.</p>
+          <p className="taskDescription">
+            <!-- show the post content here -->
+          </p>
         </div>
         <div className="actionBox">
           <CommentList data={this.state.data}/>
