@@ -18,6 +18,8 @@ So far, each component has rendered itself once based on its props. **props are 
 To implement interactions, we introduce mutable state to the component. `this.state` is private to the component and can be changed by calling this.setState(). 
 **When the state is updated, the component re-renders itself.**
 
+So in ``
+
 We add `getInitialState` method in `CommentBox`.
 
 ```js

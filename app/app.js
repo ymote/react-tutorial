@@ -68,7 +68,7 @@ var CommentBox = React.createClass({
           <p className="taskDescription">Hello, world! I am a post.</p>
         </div>
         <div className="actionBox">
-          <CommentList data={this.props.data}/>
+          <CommentList data={this.state.data}/>
           <CommentForm />
         </div>
       </div>
