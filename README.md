@@ -1,30 +1,24 @@
-In this exercise, we will use **AJAX** to fetch comments from ***_comments.json***.
+The key to dynamic updates is the call to this.setState(). As we are fecthing data from the server and the UI automatically 
+updates itself. 
 
-### Data Model
+Because of this reactivity, it is only a minor change to add live updates. We will use simple polling here but you could easily 
+use WebSockets or other technologies.
 
-Take a look at the ***_comments.json*** file. It stores a post and its comments. 
-The post has `content` (string) and `comments` (array). For each comment, there are `author`(string) and `text`(string).
+### Polling for Live Update
 
-### AJAX
+We move the AJAX call to a separate method `loadCommentsFromServer` and called it in `componentDidMount`.
 
-We use jQuery's <a href="http://api.jquery.com/jquery.ajax/" target="_blank">$.ajax</a> to make an asynchronous request. 
-The method signature for $.ajax is listed below,
+To add simple polling, we set a polling interval as attribute `pollInterval` in `CommentBox`. In the component, it is available as 
+`this.prop.pollInterval`. 
+
+Then we can use `setInterval` method in Javascript
 
 ```js
-$.ajax({
-  url: /* url to post */,
-  dataType: 'json',
-  success: function(data) {
-    /* the data is the object in _comments.json */
-  }.bind(this),
-  error: function(xhr, status, err) {
-    console.log('Can not fetch _comments.json');
-  }.bind(this)
-});
+setInterval(function,milliseconds)
 ```
 
-In the ajax `success` callback, we need to use `setState` to update data. And the ajax call should be 
-in `componentDidMount` method. 
+to call `loadCommentsFromServer` method every `pollInterval` milliseconds in the `componentDidMount`.
+
 
 
 
