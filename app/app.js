@@ -1,8 +1,3 @@
-var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"}
-];
-
 var converter = new Showdown.converter();
 
 var Comment = React.createClass({
@@ -47,13 +42,21 @@ var CommentForm = React.createClass({
   }
 });
 
-//use this.setState to set data to our hard-coded comment data in componentDidMount
+//In componentDidMount, use ajax to request data from _comments.json 
+//and set this.state.data in success callback
 var CommentBox = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {data: {content:"", comments: []}};
   },
   
   componentDidMount: function() {
+
+
+
+
+
+
+
 
   },  
   
@@ -70,7 +73,7 @@ var CommentBox = React.createClass({
           </p>
         </div>
         <div className="actionBox">
-          <CommentList data={this.state.data}/>
+          <CommentList data={this.state.data.comments}/>
           <CommentForm />
         </div>
       </div>
@@ -78,7 +81,7 @@ var CommentBox = React.createClass({
   }
 });
 
-//the data is injected to root CommentBox component as an attribute
+//the url to fetch data is injected to root CommentBox component as an attribute
 React.render(
   <CommentBox url="_comments.json" />,
   document.getElementById('content')
