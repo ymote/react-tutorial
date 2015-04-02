@@ -42,22 +42,27 @@ var CommentForm = React.createClass({
   }
 });
 
-//In componentDidMount, use ajax to request data from _comments.json 
-//and set this.state.data in success callback
+
 var CommentBox = React.createClass({
+  loadCommentsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },  
   getInitialState: function() {
     return {data: {content:"", comments: []}};
   },
-  
   componentDidMount: function() {
-
-
-
-
-
-
-
-
+    this.loadCommentsFromServer();
+    //use setInterval to call this.loadCommentsFromServer method 
+    //every this.props.pollInterval milliseconds
   },  
   
   render: function() {
@@ -83,6 +88,6 @@ var CommentBox = React.createClass({
 
 //the url to fetch data is injected to root CommentBox component as an attribute
 React.render(
-  <CommentBox url="_comments.json" />,
+  <CommentBox url="_comments.json" pollInterval={60000} />,
   document.getElementById('content')
 );
