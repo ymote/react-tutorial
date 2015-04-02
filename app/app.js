@@ -31,7 +31,7 @@ var CommentList = React.createClass({
     });    
     return (
       <div className="commentList">
-        //render the commentNodes with { } expression
+        {commentNodes}
       </div>
     );
   }
