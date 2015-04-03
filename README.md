@@ -29,7 +29,7 @@ update the changed parts**.
 
 ### 2. Build Composable Components
 
-React is all about building reusable components. In fact, with React the only thing you do is build components. 
+React is all about building reusable components. In fact, with React the only thing you do is building components. 
 Since they're so encapsulated, components make code reuse, testing, and separation of concerns easy.
 
 
