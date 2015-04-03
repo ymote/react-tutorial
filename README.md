@@ -1,46 +1,47 @@
-Now it's time to build the form. Our CommentForm component should ask the user for their name and comment text and 
-send a request to the server to save the comment.
+Let's continue from the last exercise. We will save new comments to ***_comments.json*** in this exercise.
 
-The new `<form>` is inside the `render` methdo of `CommentForm` component.
+When a user submits a comment, we will need to refresh the list of comments to include the new one. It makes sense to do 
+all of this logic in CommentBox since CommentBox owns the state that represents the list of comments.
 
-Let's make the form interactive. When the user submits the form, we should clear it, submit a request to the server, 
-and refresh the list of comments. 
+### Callbacks as props
 
-The `handleSubmit` method listens for the form's submit event and clear it.
+We need to pass user entered comment from the `CommentForm` component back up to `CommentBox`. 
 
-### Events
+We do this in `CommentBox`'s render method by passing a new callback (`handleCommentSubmit`) to the form as prop. 
 
-React attaches event handlers to components using a camelCase naming convention. We attach an **onSubmit** handler 
-to the form's submit event.
+In `CommentForm`'s `handleSubmit` method, we invoke this callback, passing the newly created comment.
 
-In the `handleSubmit` handler, first use `preventDefault()` on the event to prevent the browser's default action of submitting the form. 
-This is a common case if you are using javascript to handler form submission.
+### Save to server
 
-### Refs
+The `handleCommentSubmit` method in `CommentBox` will be triggerd every time there is a new comment. We can again use 
+jQuery's `$.ajax` to save the comment. This time, we use the **POST** method. (It is a convention to use HTTP POST method when 
+create new data, and use HTTP GET to retrive data).
 
-We need to grab user input values from the `<input>`s in the `render` method.
+```js
+  $.ajax({
+    url: //the url to post data,
+    dataType: 'json',
+    type: 'POST',
+    data: //the actual data to save,
+    success: function(data) {
+      //the server returns the data with new comment
+      //we need to update the state to the new data
+    }.bind(this),
+    error: function(xhr, status, err) {
+      console.error(this.props.url, status, err.toString());
+    }.bind(this)
+  });
+```
 
-> In React, what returned from render() is not actual rendered children instances. It is merely a description of the children instances 
-in your component's sub-hierarchy at a particular moment in time.
+On server side, we first read the post information from ***_comments.json***, then append the new comment and save back to 
+the json file. Also the updated post is returned so we can update the client side.
 
-Basically it means we can not grab the `<input>` returned from render().
+### Optimization: optimistic updates
 
-To solve this, React supports a special property -- **this.refs** that we can attach to any component that is output from render(). 
+Our application is now feature complete but it feels slow to have to wait for the request to complete before your comment appears in the list. 
+We can optimistically add this comment to the list to make the app feel faster.
 
-Here we use the ref attribute to assign names to `<input>`s. Then we can use **this.refs** to reference `<input>` components. 
-We can call `React.findDOMNode(component)` on a component to get the native browser DOM element.
-
-We can use the DOM element's value property to get user input.
-
-### Where to use refs
-
-Refs are a great way to send a message to a particular child instance (here `<input>`) in a way that would be inconvenient to do via 
-streaming Reactive props and state. 
-
-They should, however, not be your go-to abstraction for flowing data through your application.
-
-Performing DOM measurements almost always requires reaching out to a "native" component such as `<input />` and accessing 
-its underlying DOM node via `React.findDOMNode(this.refs.myInput)`. Refs are one of the only practical ways of doing this reliably.
+So in the `CommentBox`, we can directly add the new comment to the state, and then send the comment to server to save to file.
 
 
 

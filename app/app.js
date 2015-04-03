@@ -5,6 +5,9 @@ var Comment = React.createClass({
     var rawMarkup = converter.makeHtml(this.props.children.toString());
     return (
       <li>
+        <div className="commenterImage">
+          <img src={"http://lorempixel.com/50/50/people/"+this.props.index} />
+        </div>      
         <div className="commentText">
           <p className="" dangerouslySetInnerHTML={{__html: rawMarkup}}></p>
           <span className="date sub-text">by {this.props.author}</span>
@@ -14,12 +17,11 @@ var Comment = React.createClass({
   }
 });
 
-//Dynamically build comment nodes, which is an array of comment components
 var CommentList = React.createClass({
   render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+    var commentNodes = this.props.data.map(function (comment, index) {
       return (
-        <Comment author={comment.author}>
+        <Comment author={comment.author} index={index}>
           {comment.text}
         </Comment>
       );
@@ -40,7 +42,9 @@ var CommentForm = React.createClass({
     if (!text) {
       return;
     }
-    //set input DOM element's value property to empty string to clear value
+    //trigger the callback in prop to call CommentBox's handleCommentSubmit method to save comment
+    this.props.onCommentSubmit({author: author, text: text});
+    this.refs.text.getDOMNode().value = '';
   },  
   render: function() {
     return (
@@ -69,6 +73,23 @@ var CommentBox = React.createClass({
       }.bind(this)
     });
   },  
+  
+  handleCommentSubmit: function(comment) {
+    var comments = this.state.data.comments;
+    comments.push(comment);
+    this.setState({data: {content: this.state.data.content, comments: comments}}, function() {
+      // `setState` accepts a callback. To avoid (improbable) race condition,
+      //  we'll send the ajax request right after we optimistically set the new state.
+      //  finish the ajax call here to save comment to server
+      
+      
+      
+      
+      
+      
+    });
+  },
+  
   getInitialState: function() {
     return {data: {content:"", comments: []}};
   },
@@ -88,7 +109,7 @@ var CommentBox = React.createClass({
         </div>
         <div className="actionBox">
           <CommentList data={this.state.data.comments}/>
-          <CommentForm />
+          <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
         </div>
       </div>
     );
