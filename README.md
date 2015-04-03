@@ -18,19 +18,19 @@ jQuery's `$.ajax` to save the comment. This time, we use the **POST** method. (I
 create new data, and use HTTP GET to retrive data).
 
 ```js
-  $.ajax({
-    url: //the url to post data,
-    dataType: 'json',
-    type: 'POST',
-    data: //the actual data to save,
-    success: function(data) {
-      //the server returns the data with new comment
-      //we need to update the state to the new data
-    }.bind(this),
-    error: function(xhr, status, err) {
-      console.error(this.props.url, status, err.toString());
-    }.bind(this)
-  });
+$.ajax({
+  url: //the url to post data,
+  dataType: 'json',
+  type: 'POST',
+  data: //the actual data to save,
+  success: function(data) {
+    //the server returns the data with new comment
+    //we need to update the this.state to the new {data: data}
+  }.bind(this),
+  error: function(xhr, status, err) {
+    console.error(this.props.url, status, err.toString());
+  }.bind(this)
+});
 ```
 
 On server side, we first read the post information from ***_comments.json***, then append the new comment and save back to 
