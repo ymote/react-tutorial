@@ -29,8 +29,7 @@ Refs are used to access underlying DOM node via React.findDOMNode(this.refs...).
 helpful if the component has state variables.
 
 2. **Mounting: componentDidMount** invoked once, immediately after the initial rendering occurs. 
-At this point in the lifecycle, the component has a DOM representation which you can access via React.findDOMNode(this).
-
+At this point in the lifecycle, the component has a DOM representation which you can access via React.findDOMNode(this). 
 If you want to integrate with other JavaScript frameworks, set timers using setTimeout or setInterval, or send AJAX requests, 
 perform those operations in this method.
 
