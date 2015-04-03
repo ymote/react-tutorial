@@ -1,20 +1,21 @@
-We'll be building a simple but realistic comments box that you can drop into a blog, a basic version of the realtime comments offered by Disqus, LiveFyre or Facebook comments.
+In the following three chapters, we'll be building a simple but realistic comments box that you can drop into a blog, a basic version of the 
+realtime comments offered by Disqus, LiveFyre or Facebook comments.
 
 We'll provide:
 
-1. A view of all of the comments
+1. A view of all of the comments of a post
 2. A form to submit a comment
-3. Hooks for you to provide a custom backend
+3. Save comments to backend
 
 ### Your first component
 
 React is all about modular, composable components. For our comment box example, we'll have the following component structure:
 
 ```
-- CommentBox
-  - CommentList
-    - Comment
-  - CommentForm
+- CommentBox     //CommentBox is the outer component, which is simply a <div>.
+  - CommentList  //CommentList host a list of comment components. It is a <ul>.
+    - Comment    //Comment Component is a <div> contains a comment.
+  - CommentForm  //CommentForm is a <form> to create new comment.
 ```
 
 Let's build the `CommentBox` component, which is just a simple `<div>`.
