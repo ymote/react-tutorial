@@ -15,13 +15,13 @@ that is, a component should ideally only do one thing. If it ends up growing it 
 **tl;dr:** If a Component needs to alter one of its attributes at some point in time, that attribute should be part of its _state_, 
 otherwise it should just be a _prop_ for that Component.
 
-Props represent data passed in from a parent component to child component through attributes when rendering child components. 
+1. Props represent data passed in from a parent component to child component through attributes when rendering child components. 
 We access the data as `this.props` in child component. Props are **immutable**.  
 
-A Component manages its own _state_ internally, but—besides setting an initial state—has no business fiddling with the _state_ of its children. 
+2. A Component manages its own _state_ internally, but—besides setting an initial state—has no business fiddling with the _state_ of its children. 
 You could say the state is **private.**
 
-Refs are used to access underlying DOM node via React.findDOMNode(this.refs...). This allows you to direactly manipulate DOM elements.
+3. Refs are used to access underlying DOM node via React.findDOMNode(this.refs...). This allows you to direactly manipulate DOM elements.
 
 ### Component Specs and Lifecycle
 
