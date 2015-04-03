@@ -80,13 +80,18 @@ var CommentBox = React.createClass({
     this.setState({data: {content: this.state.data.content, comments: comments}}, function() {
       // `setState` accepts a callback. To avoid (improbable) race condition,
       //  we'll send the ajax request right after we optimistically set the new state.
-      //  finish the ajax call here to save comment to server
-      
-      
-      
-      
-      
-      
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        type: 'POST',
+        data: comment,
+        success: function(data) {
+          this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
     });
   },
   
@@ -116,7 +121,6 @@ var CommentBox = React.createClass({
   }
 });
 
-//the url to fetch data is injected to root CommentBox component as an attribute
 React.render(
   <CommentBox url="_comments.json" pollInterval={60000}/>,
   document.getElementById('content')

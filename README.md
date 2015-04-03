@@ -1,48 +1,38 @@
-Let's continue from the last exercise. We will save new comments to ***_comments.json*** in this exercise.
+### Congrats!
 
-When a user submits a comment, we will need to refresh the list of comments to include the new one. It makes sense to do 
-all of this logic in CommentBox since CommentBox owns the state that represents the list of comments.
+You have just built a comment box in ReactJS. Let's summarize what we learned so far.
 
-### Callbacks as props
+### Components
 
-We need to pass user entered comment from the `CommentForm` component back up to `CommentBox`. 
+The first thing you'll want to do is to identify components and draw boxes around every component (and subcomponent).
 
-We do this in `CommentBox`'s render method by passing a new callback (`handleCommentSubmit`) to the form as prop. 
+How do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. 
+One such technique is the <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">single responsibility principle</a>, 
+that is, a component should ideally only do one thing. If it ends up growing it should be decomposed into smaller subcomponents.
 
-In `CommentForm`'s `handleSubmit` method, we invoke this callback, passing the newly created comment.
+### Props, States and Refs
 
-### Save to server
+**tl;dr:** If a Component needs to alter one of its attributes at some point in time, that attribute should be part of its _state_, 
+otherwise it should just be a _prop_ for that Component.
 
-The `handleCommentSubmit` method in `CommentBox` will be triggerd every time there is a new comment. We can again use 
-jQuery's `$.ajax` to save the comment. This time, we use the **POST** method. (It is a convention to use HTTP POST method when 
-create new data, and use HTTP GET to retrive data).
+Props represent data passed in from a parent component to child component through attributes when rendering child components. 
+We access the data as `this.props` in child component. Props are **immutable**.  
 
-```js
-$.ajax({
-  url: //the url to post data,
-  dataType: 'json',
-  type: 'POST',
-  data: //the actual data to save,
-  success: function(data) {
-    //the server returns the data with new comment
-    //we need to update the this.state to the new {data: data}
-  }.bind(this),
-  error: function(xhr, status, err) {
-    console.error(this.props.url, status, err.toString());
-  }.bind(this)
-});
-```
+A Component manages its own _state_ internally, but—besides setting an initial state—has no business fiddling with the _state_ of its children. 
+You could say the state is **private.**
 
-On server side, we first read the post information from ***_comments.json***, then append the new comment and save back to 
-the json file. Also the updated post is returned so we can update the client side.
+Refs are used to access underlying DOM node via React.findDOMNode(this.refs...). This allows you to direactly manipulate DOM elements.
 
-### Optimization: optimistic updates
+### Component Specs and Lifecycle
 
-Our application is now feature complete but it feels slow to have to wait for the request to complete before your comment appears in the list. 
-We can optimistically add this comment to the list to make the app feel faster.
+1. **getInitialState** invoked once before the component is mounted. The return value will be used as the initial value of this.state. This is very 
+helpful if the component has state variables.
 
-So in the `CommentBox`, we can directly add the new comment to the state, and then send the comment to server to save to file.
+2. **Mounting: componentDidMount** invoked once, immediately after the initial rendering occurs. 
+At this point in the lifecycle, the component has a DOM representation which you can access via React.findDOMNode(this).
 
+If you want to integrate with other JavaScript frameworks, set timers using setTimeout or setInterval, or send AJAX requests, 
+perform those operations in this method.
 
 
 
