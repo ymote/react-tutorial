@@ -1,6 +1,6 @@
 Markdown is a simple way to format your text inline. For example, surrounding text with asterisks will make it emphasized.
 
-First, we add the third-party Showdown library to the `<head>` in ***index.html***. This is a JavaScript library which takes Markdown text and converts it to raw HTML. 
+First, we add the third-party **Showdown** library to the `<head>` in ***index.html***. This is a JavaScript library which takes Markdown text and converts it to raw HTML. 
 
 Next, let's convert the comment text to Markdown and output it.
 
