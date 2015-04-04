@@ -1,12 +1,18 @@
-Now we have basic structure of our comment box ready. We focus on how to render a single commment.
+Now we have basic structure of our comment box ready. We focus on how to render a single comment with the `Comment` Component. 
+The `ComponentList` component is made of a list of `Comment` components.
+
+### Data flow
+
+React is often used to build the **View** layer in an application. We can think of all comments are data coming from a backend server or 
+a database. To maintain the maximum reusability, data fetching should occurs in the root `CommentBox` component. It is then pass the data along 
+to child components for rendering.
 
 ### Using props
 
-The look of a comment is not terribly exciting. More importantly, the Comment component, which will depend on data passed in from it's parent (`CommentList`). 
+To this end, the Comment component depends on data passed in from it's parent (`CommentList`) to render its view. 
 Data passed in from a parent component is available as a 'property' on the child component. These 'properties' are accessed through **this.props**. 
 
-
-Assume we have a comment component as follows,
+Assume we have a `Comment` component as follows,
 
 ```js
   <div className="commentText">
@@ -19,14 +25,14 @@ It expects `this.props.author` and `this.props.chidren` passed in from parent. `
 
 > We access named attributes passed to the component as keys on this.props and any nested elements as this.props.children.
 
-To use Comment in CommentList component:
+To use `Comment` in `CommentList` component:
 
 ```js
   <Comment author="Pete Hunt">This is one comment</Comment>
 ```
 
-The `author` is an attribute passed in, in this case -- Peter Hunt. `children` is used to access the content in the element. 
-It is `This is one comment`.
+The `author` is an attribute on the `Comment`, in this case -- Peter Hunt. `children` is used to access the content in the element. 
+In this case it is `This is one comment`.
 
 ### Children
 
@@ -36,15 +42,14 @@ You can include additional React components or JavaScript expressions between th
 <Parent><Child /></Parent>
 ```
 
-Parent can read its children by accessing the special **this.props.children** prop.
-
+Parent can read its children by accessing the special **this.props.children** prop. The `<Child />` chould be a component, DOM element or simple text.
 
 ### Ownership
 
 In React, an owner is the component that sets the props of other components. In our case, `Comment` is owned by `CommentList`.
 
-A component **cannot mutate its props** — they are always consistent with what its owner sets them to. This key property leads to UIs that are guaranteed to be consistent.
+> A component **cannot mutate its props** — they are always consistent with what its owner sets them to. This key property leads to UIs that are guaranteed to be consistent.
 
-The `Comment` component can not change its author and text. It only renders a comment to HTML.
+The `Comment` component can not change its author and text. It only reads them and renders them to HTML.
 
 
