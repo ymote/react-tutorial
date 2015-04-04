@@ -4,7 +4,7 @@ The `ComponentList` component is made of a list of `Comment` components.
 ### Data flow
 
 React is often used to build the **View** layer in an application. We can think of all comments are data coming from a backend server or 
-a database. To maintain the maximum reusability, data fetching should occurs in the root `CommentBox` component. It is then pass the data along 
+a database. To maintain the maximum reusability, data fetching should occurs in the root `CommentBox` component. It then pass the data along 
 to child components for rendering.
 
 ### Using props
@@ -31,8 +31,8 @@ To use `Comment` in `CommentList` component:
   <Comment author="Pete Hunt">This is one comment</Comment>
 ```
 
-The `author` is an attribute on the `Comment`, in this case -- Peter Hunt. `children` is used to access the content in the element. 
-In this case it is `This is one comment`.
+The `author` is an attribute on the `Comment`, in this case -- _Peter Hunt_. `children` is used to access the content in the element. 
+In this case it is _This is one comment_.
 
 ### Children
 
@@ -42,7 +42,7 @@ You can include additional React components or JavaScript expressions between th
 <Parent><Child /></Parent>
 ```
 
-Parent can read its children by accessing the special **this.props.children** prop. The `<Child />` chould be a component, DOM element or simple text.
+Parent can read its children by accessing the special **this.props.children** prop. The `<Child />` can be a component, DOM element or simple text.
 
 ### Ownership
 
