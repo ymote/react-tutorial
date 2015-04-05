@@ -85,10 +85,6 @@ var CommentBox = React.createClass({
 
 
 
-
-
-
-         
     });
   },
   
