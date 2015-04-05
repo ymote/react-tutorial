@@ -81,12 +81,14 @@ var CommentBox = React.createClass({
       // `setState` accepts a callback. To avoid (improbable) race condition,
       //  we'll send the ajax request right after we optimistically set the new state.
       //  finish the ajax call here to save comment to server
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+         
     });
   },
   
