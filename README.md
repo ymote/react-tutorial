@@ -1,5 +1,4 @@
-The key to dynamic updates is the call to this.setState(). As we are fecthing data from the server and the UI automatically 
-updates itself. 
+The key to dynamic updates is the call to this.setState() after receiving new data, and the UI automatically updates itself. 
 
 Because of this reactivity, it is only a minor change to add live updates. We will use simple polling here but you could easily 
 use WebSockets or other technologies.
@@ -8,7 +7,7 @@ use WebSockets or other technologies.
 
 We move the AJAX call to a separate method `loadCommentsFromServer` and called it in `componentDidMount`.
 
-To add simple polling, we set a polling interval as attribute `pollInterval` in `CommentBox`. In the component, it is available as 
+To add simple polling, we set a polling interval as attribute `pollInterval` in `CommentBox`. In the component, we can access its value through 
 `this.prop.pollInterval`. 
 
 Then we can use `setInterval` method in Javascript
