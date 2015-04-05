@@ -1,31 +1,32 @@
 In the next two exercises, we will replace the hard-coded data with some dynamic data from the server. 
-We will remove the data prop and replace it with a URL to fetch. 
+We will remove the data prop and replace it with a URL to fetch JSON data. 
 
-We put comments in ***_comments.json*** and use ajax to load data from the json file in `CommentBox`.
+We put comments in ***_comments.json*** and use ajax to load data from the json file.
 
-So the `CommentBox` looks like this now,
+Now the `CommentBox` has an attribute `url`,
 
 ```js
 <CommentBox url="_comments.json" />
 ```
 
-It is different from the prior components because it will have to re-render itself. The component won't have any data until the request from the server comes back, 
-at which point the component may need to render some new comments.
+It is different from the prior components because it will have to re-render itself. The component won't have any data until 
+the request from the server comes back, at which point the component may need to render some new comments.
 
 ### Reactive state
 
 So far, each component has rendered itself once based on its props. **props are immutable**: they are passed from the parent and are "owned" by the parent. 
-To implement interactions, we introduce mutable state to the component. `this.state` is private to the component and can be changed by calling this.setState(). 
-**When the state is updated, the component re-renders itself.**
 
-So in ``
+To implement interactions, we introduce mutable state to the component. `this.state` is private to the component and can be changed 
+by calling **this.setState()**. 
+
+> When the state is updated, the component re-renders itself.
 
 We add `getInitialState` method in `CommentBox`.
 
 ```js
 getInitialState: function() {
   return {data: []};
-},
+}
 ```
 > getInitialState() executes exactly once during the lifecycle of the component and sets up the initial state of the component.
 
