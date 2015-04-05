@@ -8,8 +8,6 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(methodOverride());
 
-app.use('/', express.static(path.join(__dirname, '')));
-
 app.get('/_comments.json', function(req, res) {
   fs.readFile('_comments.json', function(err, data) {
     res.setHeader('Content-Type', 'application/json');
@@ -27,5 +25,7 @@ app.post('/_comments.json', function(req, res) {
     });
   });
 });
+
+app.use('/', express.static(path.join(__dirname, '')));
 
 app.listen(8000);
