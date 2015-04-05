@@ -12,10 +12,10 @@ The method signature for $.ajax is listed below,
 
 ```js
 $.ajax({
-  url: /* url to post */,
+  url: /* url to send request to */,
   dataType: 'json',
   success: function(data) {
-    /* the data is the object in _comments.json */
+    /* the data is the post object in _comments.json */
   }.bind(this),
   error: function(xhr, status, err) {
     console.log('Can not fetch _comments.json');
@@ -23,7 +23,7 @@ $.ajax({
 });
 ```
 
-In the ajax `success` callback, we need to use `setState` to update data. And the ajax call should be 
+In the ajax `success` callback, we need to use `setState` to update data. From the last exercise, we know the ajax call should be 
 in `componentDidMount` method. 
 
 
