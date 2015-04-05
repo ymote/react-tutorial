@@ -15,7 +15,7 @@ app.get('/_comments.json', function(req, res) {
   });
 });
 
-app.post('/_comments.json', function(req, res) {
+app.post('/comments.json', function(req, res) {
   fs.readFile('_comments.json', function(err, data) {
     var post = JSON.parse(data);
     post.comments.push(req.body);
