@@ -3,6 +3,7 @@ var converter = new Showdown.converter();
 var Comment = React.createClass({
   render: function() {
     var rawMarkup = converter.makeHtml(this.props.children.toString());
+    var author = converter.makeHtml('by '+this.props.author);
     return (
       <li>
         <div className="commentText">
