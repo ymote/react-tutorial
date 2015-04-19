@@ -26,10 +26,10 @@ React.render(
 /* end CommentBox */
 @@@
 prompt: Add List and Form
-type: "undo"
-type: "undo"
-type: "undo"
-type: "undo"
+type: {command: "undo"}
+type: {command: "undo"}
+type: {command: "undo"}
+type: {command: "undo"}
 moveTo: 12:6
 type: <div className="actionBox">
 moveTo: 13:8
