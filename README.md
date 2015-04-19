@@ -12,10 +12,10 @@ We'll provide:
 React is all about modular, composable components. For our comment box example, we'll have the following component structure:
 
 ```
-- CommentBox     //CommentBox is the outer component, which is simply a <div>.
-  - CommentList  //CommentList host a list of comment components. It is a <ul>.
-    - Comment    //Comment Component is a <div> contains a comment.
-  - CommentForm  //CommentForm is a <form> to create new comment.
+- CommentBox    //the outer component, which is a <div>.
+  - CommentList //host a list of comment components, a <ul>.
+    - Comment   //a <div> contains a comment.
+  - CommentForm //<form> to create new comment.
 ```
 
 Let's build the `CommentBox` component, which is just a simple `<div>`.
