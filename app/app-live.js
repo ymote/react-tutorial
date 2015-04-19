@@ -13,7 +13,7 @@ var CommentBox = React.createClass({
       <div className="actionBox">   
         <CommentList />   
         <CommentForm />   
-      <   
+      </div>   
       </div>
     );
   }

@@ -40,4 +40,4 @@ type: <CommentForm />
 tooltip: "Add the CommentForm React Component"
 moveTo: 15:6
 type: </div>
-tooltip: "Now take a look at the CommentList"
+prompt: "Now take a look at the CommentList"
