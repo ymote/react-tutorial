@@ -30,14 +30,15 @@ run: {command: "undo"}
 run: {command: "undo"}
 run: {command: "undo"}
 run: {command: "undo"}
-moveTo: 12:6
+moveTo: 12:8
 type: <div className="actionBox">
-moveTo: 15:6
+moveTo: 15:8
 type: </div>
-moveTo: 13:8
+tooltip: Next add components inside the div
+moveTo: 13:10
 type: <CommentList />
 tooltip: Add the CommentList React Component
-moveTo: 14:8
+moveTo: 14:10
 type: <CommentForm />
 tooltip: Add the CommentForm React Component
 prompt: Next is CommentList
