@@ -10,10 +10,10 @@ var CommentBox = React.createClass({
         <div className="commentBox">
           <p className="taskDescription">Hello, world! I am a post.</p>
         </div>
-      <div className="actionBox">   
-        <CommentList />   
-        <CommentForm />   
-      </div>   
+        <div className="actionBox"> 
+          <CommentList /> 
+          <CommentForm /> 
+        </div> 
       </div>
     );
   }
