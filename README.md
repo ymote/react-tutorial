@@ -7,11 +7,6 @@ Let's build skeletons for CommentList and CommentForm in this exercise. Remember
   - CommentForm
 ```
 
-### Refactor
-
-Let's put our javascript code into a seperate file ***app.js*** and clean up ***index.html***. Now in ***index.html***,
-we use the `<script>` tag to reference ***app.js***in `<body>`, we still need to declare the type of script as `jsx`.
-
 ### Composing components
 
 This is the place we begin to understand React's idea of component hierarchy.
