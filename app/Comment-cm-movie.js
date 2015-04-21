@@ -32,5 +32,5 @@ type: var author = converter.makeHtml('by '+this.props.author);
 tooltip: Convert author info from Markdown to HTML
 moveTo: 10:10
 type: <p className="" dangerouslySetInnerHTML={{__html: rawMarkup}}></p>
-tooltip: By defautl, React treacts HTML tag as plain string. To properly render text as HTML, there is a special API -- dangerouslySetInnerHTML.
+tooltip: By defautl, React treacts HTML tag as plain string. To properly render text as HTML, there is a special API -- dangerouslySetInnerHTML
 prompt: Added Markdown
