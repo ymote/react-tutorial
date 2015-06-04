@@ -1,9 +1,9 @@
 var CommentList = React.createClass({
   render: function() {
     return (
-      <div className="commentList">
+      <ul className="commentList">
         Hello, world! I am a CommentList.
-      </div>
+      </ul>
     );
   }
 });
